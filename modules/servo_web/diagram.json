@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "author": "Copilot",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-text",
+      "id": "title",
+      "top": -40,
+      "left": 0,
+      "attrs": { "text": "ESP32 DevKit v1 and a servo, controlled over WiFi (no IR)", "fontSize": "18" }
+    },
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp32", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-servo", "id": "servo1", "top": 20, "left": 260, "attrs": {} },
+    {
+      "type": "wokwi-text",
+      "id": "wifiLabel",
+      "top": 20,
+      "left": 400,
+      "attrs": {
+        "text": "No IR receiver here. First boot: connect a phone to the 'ServoControlSetup' access point, a captive portal lets you enter your home WiFi credentials (WiFiManager library, nothing hardcoded). After that it joins your WiFi normally, check Serial for the IP.",
+        "fontSize": "13"
+      }
+    }
+  ],
+  "connections": [
+    [ "esp32:D33", "servo1:PWM", "magenta", [] ],
+    [ "esp32:VIN", "servo1:V+", "red", [] ],
+    [ "esp32:GND.1", "servo1:GND", "black", [] ]
+  ]
+}

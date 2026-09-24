@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "author": "Copilot",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-text",
+      "id": "title",
+      "top": -40,
+      "left": 0,
+      "attrs": { "text": "ESP32 DevKit v1 and an IR receiver only", "fontSize": "18" }
+    },
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp32", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-ir-receiver", "id": "ir1", "top": 20, "left": 260, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp32:D4", "ir1:DAT", "red", [] ],
+    [ "esp32:3V3", "ir1:VCC", "green", [] ],
+    [ "esp32:GND.1", "ir1:GND", "yellow", [] ]
+  ]
+}

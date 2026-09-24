@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "author": "Copilot",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-text",
+      "id": "title",
+      "top": -40,
+      "left": 0,
+      "attrs": { "text": "ESP32 DevKit v1 and a single servo (Elegoo example, pin 18)", "fontSize": "18" }
+    },
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp32", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-servo", "id": "servo1", "top": 20, "left": 260, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp32:D33", "servo1:PWM", "magenta", [] ],
+    [ "esp32:VIN", "servo1:V+", "red", [] ],
+    [ "esp32:GND.1", "servo1:GND", "black", [] ]
+  ]
+}
