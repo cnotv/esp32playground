@@ -7,8 +7,8 @@ applyTo: "Makefile, *.ino, wokwi.toml"
 
 Use the Makefile. Do not hand roll `arduino-cli` invocations.
 
-There is no root sketch, `modules/servo/`, `modules/ir/`, and
-`modules/servo_web/` are each separate, standalone sketches (own
+There is no root sketch, `modules/servo/`, `modules/ir/`, `modules/servo_web/`,
+and `modules/buzzer_web/` are each separate, standalone sketches (own
 `setup()`/`loop()`). The Makefile generates `<name>-compile`/`<name>-upload`/
 `<name>-flash` targets from the `MODULES` list, one line per module:
 
@@ -24,6 +24,10 @@ make ir-flash       # compile then upload
 make servoweb-compile
 make servoweb-upload
 make servoweb-flash # compile then upload
+
+make buzzerweb-compile
+make buzzerweb-upload
+make buzzerweb-flash # compile then upload
 
 make monitor        # arduino-cli monitor, reads Serial output at 9600 baud,
                      # works for whichever module is currently flashed

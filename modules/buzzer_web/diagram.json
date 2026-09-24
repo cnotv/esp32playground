@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "author": "Copilot",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-text",
+      "id": "title",
+      "top": -40,
+      "left": 0,
+      "attrs": { "text": "ESP32 DevKit v1 and a passive buzzer, controlled over WiFi", "fontSize": "18" }
+    },
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp32", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-buzzer", "id": "buzzer1", "top": 20, "left": 260, "attrs": {} },
+    {
+      "type": "wokwi-text",
+      "id": "wifiLabel",
+      "top": 20,
+      "left": 380,
+      "attrs": {
+        "text": "First boot: connect a phone to the 'BuzzerSetup' access point, a captive portal lets you enter your home WiFi credentials (WiFiManager library, nothing hardcoded). After that browse to the printed IP for a mini piano.",
+        "fontSize": "13"
+      }
+    }
+  ],
+  "connections": [
+    [ "esp32:D25", "buzzer1:1", "magenta", [] ],
+    [ "esp32:GND.1", "buzzer1:2", "black", [] ]
+  ]
+}

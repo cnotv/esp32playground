@@ -19,6 +19,8 @@ targets, FQBN, port, and how Wokwi picks up build output.
 - `modules/servo_web/` - controls the same servo over WiFi instead of IR
   (`WiFiManager` captive portal, no hardcoded credentials), the working
   replacement for the dead IR receiver.
+- `modules/buzzer_web/` - passive buzzer played as a mini piano (`C4`-`C5`)
+  from a web page, same `WiFiManager` captive portal pattern as `servo_web`.
 - `modules/breadboard/`, `modules/epaper/` - diagram-only wiring references,
   no `.ino`, see `.claude/instructions/wokwi-diagram.instructions.md` for the
   caveat about their stale `wokwi.toml`.

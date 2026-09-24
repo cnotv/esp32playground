@@ -7,10 +7,11 @@ BAUD := 9600
 # Each entry here is a standalone sketch under modules/<dir> with its own
 # setup()/loop(). Add a module by adding one line below, name is the Make
 # target prefix (<name>-compile/-upload/-flash), dir is its folder under modules/.
-MODULES := servo ir servoweb
+MODULES := servo ir servoweb buzzerweb
 MODULE_DIR_servo := modules/servo
 MODULE_DIR_ir := modules/ir
 MODULE_DIR_servoweb := modules/servo_web
+MODULE_DIR_buzzerweb := modules/buzzer_web
 
 .PHONY: monitor $(foreach m,$(MODULES),$(m)-compile $(m)-upload $(m)-flash)
 
