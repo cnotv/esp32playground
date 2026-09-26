@@ -30,6 +30,52 @@ void playNote(int frequency) {
   tone(buzzerPin, frequency, noteDurationMs);
 }
 
+// Plays a rising siren sweep
+void playSiren() {
+  for (int freq = 200; freq <= 1500; freq += 20) {
+    tone(buzzerPin, freq);
+    delay(8);
+  }
+  noTone(buzzerPin);
+}
+
+// Plays a slow wobble between two low tones, like a ghost moaning
+void playGhostMoan() {
+  for (int i = 0; i < 6; i++) {
+    tone(buzzerPin, 150);
+    delay(150);
+    tone(buzzerPin, 220);
+    delay(150);
+  }
+  noTone(buzzerPin);
+}
+
+// Plays two low thumps like a heartbeat
+void playHeartbeat() {
+  tone(buzzerPin, 60, 120);
+  delay(180);
+  tone(buzzerPin, 60, 120);
+  delay(180);
+}
+
+// Plays random frequency jumps for a glitchy screech
+void playScreech() {
+  for (int i = 0; i < 20; i++) {
+    tone(buzzerPin, random(300, 3000));
+    delay(30);
+  }
+  noTone(buzzerPin);
+}
+
+// Plays a slow descending drone
+void playDoomDrone() {
+  for (int freq = 400; freq >= 60; freq -= 10) {
+    tone(buzzerPin, freq);
+    delay(20);
+  }
+  noTone(buzzerPin);
+}
+
 // Builds the piano key buttons for the control page
 String buildKeysHtml() {
   String html;
@@ -39,14 +85,20 @@ String buildKeysHtml() {
   return html;
 }
 
-// Serves the control page with piano key buttons
+// Serves the control page with piano key buttons and scary sound effects
 void handleRoot() {
   String html = "<!DOCTYPE html><html><head><title>Mini Piano</title>"
     "<meta name='viewport' content='width=device-width, initial-scale=1'>"
     "<style>body{font-family:sans-serif;text-align:center;padding-top:40px}"
     "button{font-size:22px;padding:16px 18px;margin:4px}</style></head><body>"
     "<h1>Mini Piano</h1><p>" + buildKeysHtml() + "</p>"
-    "</body></html>";
+    "<h1>Scary Sounds</h1><p>"
+    "<button onclick=\"fetch('/siren')\">Siren</button>"
+    "<button onclick=\"fetch('/ghost')\">Ghost Moan</button>"
+    "<button onclick=\"fetch('/heartbeat')\">Heartbeat</button>"
+    "<button onclick=\"fetch('/screech')\">Screech</button>"
+    "<button onclick=\"fetch('/doom')\">Doom Drone</button>"
+    "</p></body></html>";
   server.send(200, "text/html", html);
 }
 
@@ -71,6 +123,11 @@ void handleNote() {
 void setupRoutes() {
   server.on("/", handleRoot);
   server.on("/note", handleNote);
+  server.on("/siren", [](){ playSiren(); server.send(200, "text/plain", "ok"); });
+  server.on("/ghost", [](){ playGhostMoan(); server.send(200, "text/plain", "ok"); });
+  server.on("/heartbeat", [](){ playHeartbeat(); server.send(200, "text/plain", "ok"); });
+  server.on("/screech", [](){ playScreech(); server.send(200, "text/plain", "ok"); });
+  server.on("/doom", [](){ playDoomDrone(); server.send(200, "text/plain", "ok"); });
 }
 
 void setup() {

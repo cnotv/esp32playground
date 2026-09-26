@@ -21,9 +21,18 @@ targets, FQBN, port, and how Wokwi picks up build output.
   replacement for the dead IR receiver.
 - `modules/buzzer_web/` - passive buzzer played as a mini piano (`C4`-`C5`)
   from a web page, same `WiFiManager` captive portal pattern as `servo_web`.
-- `modules/breadboard/`, `modules/epaper/` - diagram-only wiring references,
-  no `.ino`, see `.claude/instructions/wokwi-diagram.instructions.md` for the
-  caveat about their stale `wokwi.toml`.
+- `modules/scare_prop/` - autonomous jump-scare prop, no WiFi: an HC-SR04
+  distance sensor triggers a fan relay, LED, buzzer siren, and servo jerk when
+  something gets close. Read its `diagram.md` before wiring the fan, a bare
+  motor or bare relay coil on a GPIO will damage the pin, it needs an actual
+  relay MODULE (onboard driver), confirm that's what you have first.
+- `modules/epaper/` - drives a 4.2in SPI e-paper module via GxEPD2, currently
+  just draws a placeholder, no calendar/notes/image source wired up yet.
+  Wokwi has no e-paper part, its diagram is wiring documentation only, not a
+  working simulation, see its own `diagram.md`.
+- `modules/breadboard/` - diagram-only wiring reference, no `.ino`, see
+  `.claude/instructions/wokwi-diagram.instructions.md` for the caveat about
+  its stale `wokwi.toml`.
 
 Each module's own `.ino` is the source of truth for its wiring. Read it before
 changing that module's diagram. If a diagram and its sketch disagree, the

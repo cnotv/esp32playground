@@ -11,19 +11,23 @@ Serial for the IP it was assigned, then browse to it for the
 Up/Down/Play-Pause/Go-to buttons.
 
 ```
+       [======= BREADBOARD POWER RAILS =======]
+       (+) 5V Rail   ================================= (Connects to ESP32 VIN, Servo V+)
+       (-) GND Rail  ================================= (Connects to ESP32 GND, Servo GND)
+
        +-----------------------------------------------+
        |            ESP32 DEVKIT V1 (30-pin)            |
        |                  [ USB PORT ]                  |
        |                                                 |
        |  D33 [========]----> To Servo PWM              |
-       |  GND [========]----> To Servo GND              |
-       |  VIN [========]----> To Servo V+                |
+       |  GND [=======> GND Rail]                       |
+       |  VIN [=======> 5V Rail]                        |
        +-----------------------------------------------+
 
        +-----------------------------------------------+
        |               MICRO SERVO                      |
-       |  V+  ---> ESP32 VIN                            |
-       |  GND ---> ESP32 GND                             |
+       |  V+  ---> To 5V Rail                           |
+       |  GND ---> To GND Rail                          |
        |  PWM ---> ESP32 D33                             |
        +-----------------------------------------------+
 ```

@@ -11,6 +11,7 @@
       "attrs": { "text": "ESP32 DevKit v1 and a servo, controlled over WiFi (no IR)", "fontSize": "18" }
     },
     { "type": "wokwi-esp32-devkit-v1", "id": "esp32", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-breadboard", "id": "bb1", "top": 120, "left": 200, "attrs": {} },
     { "type": "wokwi-servo", "id": "servo1", "top": 20, "left": 260, "attrs": {} },
     {
       "type": "wokwi-text",
@@ -25,7 +26,9 @@
   ],
   "connections": [
     [ "esp32:D33", "servo1:PWM", "magenta", [] ],
-    [ "esp32:VIN", "servo1:V+", "red", [] ],
-    [ "esp32:GND.1", "servo1:GND", "black", [] ]
+    [ "esp32:VIN", "bb1:tp.2", "red", [] ],
+    [ "esp32:GND.1", "bb1:tn.2", "black", [] ],
+    [ "servo1:V+", "bb1:tp.11", "red", [] ],
+    [ "servo1:GND", "bb1:tn.11", "black", [] ]
   ]
 }

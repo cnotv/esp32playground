@@ -12,17 +12,20 @@ anymore, both were removed along with `sketch_sep13a.ino` when the project
 split into standalone modules. Every diagram now lives inside its own
 `modules/<name>/` folder, next to that module's `wokwi.toml`.
 
-- `modules/servo/`, `modules/ir/`, and `modules/servo_web/` are standalone
-  sketches (each with its own `.ino` defining `setup()`/`loop()`). Each
-  `wokwi.toml` points at its own `modules/<name>/build/`, and each is
-  compiled/flashed with its own `<name>-*` Makefile targets.
-- `modules/breadboard/` and `modules/epaper/` are diagram-only folders with no
-  `.ino` of their own. They predate the split into modules, no single sketch
-  matches their wiring anymore (breadboard shows a servo and the now-dead IR
-  receiver together, epaper's part is a stand-in Wokwi can't really simulate),
-  so their `wokwi.toml` points at `modules/servo/`'s build purely so the
-  simulator has something valid to load, not because that firmware matches
-  the diagram. See each folder's own `diagram.md` for what's actually true.
+- `modules/servo/`, `modules/ir/`, `modules/servo_web/`, `modules/buzzer_web/`,
+  `modules/scare_prop/`, and `modules/epaper/` are standalone sketches (each
+  with its own `.ino` defining `setup()`/`loop()`). Each `wokwi.toml` points at
+  its own `modules/<name>/build/`, and each is compiled/flashed with its own
+  `<name>-*` Makefile targets. `modules/epaper/`'s Wokwi part
+  (`wokwi-ili9341`) is still a stand-in, Wokwi has no e-paper part and can't
+  simulate the real GxEPD2/SSD1683 protocol even though the firmware is real,
+  see its `diagram.md`.
+- `modules/breadboard/` is a diagram-only folder with no `.ino` of its own. It
+  predates the split into modules, no single sketch matches its wiring
+  anymore (it shows a servo and the now-dead IR receiver together), so its
+  `wokwi.toml` points at `modules/servo/`'s build purely so the simulator has
+  something valid to load, not because that firmware matches the diagram. See
+  its own `diagram.md` for what's actually true.
 
 ### Companion ASCII diagram
 
