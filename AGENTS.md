@@ -26,8 +26,16 @@ targets, FQBN, port, and how Wokwi picks up build output.
   something gets close. Read its `diagram.md` before wiring the fan, a bare
   motor or bare relay coil on a GPIO will damage the pin, it needs an actual
   relay MODULE (onboard driver), confirm that's what you have first.
-- `modules/epaper/` - drives a 4.2in SPI e-paper module via GxEPD2, currently
-  just draws a placeholder, no calendar/notes/image source wired up yet.
+- `modules/epaper/` - drives a 4.2in black/white/red SPI e-paper module via
+  GxEPD2, rotating a real NTP clock (`WiFiManager` captive portal, same
+  pattern as `servo_web`) with three slots (forecast, events, notes). The
+  board serves a control page and HTTP endpoints at `http://epaper.local`
+  (routes are listed above `startServer()` in the sketch, the page lives in
+  `page.h`) to save notes and upload one image per slot, stored in LittleFS.
+  A slot with no image shows invented placeholder content. Run
+  `modules/epaper/test_endpoints.sh` against the board after changing the
+  endpoints. Every screen change is a full refresh of about 10 s, this panel
+  has no partial refresh, so never design for frequent updates.
   Wokwi has no e-paper part, its diagram is wiring documentation only, not a
   working simulation, see its own `diagram.md`.
 - `modules/breadboard/` - diagram-only wiring reference, no `.ino`, see
