@@ -8,14 +8,15 @@
       "id": "title",
       "top": -40,
       "left": 0,
-      "attrs": { "text": "ESP32 DevKit v1: distance-triggered scare prop (fan+LED+buzzer+servo)", "fontSize": "16" }
+      "attrs": { "text": "ESP32 DevKit v1: distance-triggered scare prop (fan+2 LEDs+I2S speaker+servo, phone control)", "fontSize": "16" }
     },
     { "type": "wokwi-esp32-devkit-v1", "id": "esp32", "top": 20, "left": 0, "attrs": {} },
     { "type": "wokwi-breadboard", "id": "bb1", "top": 180, "left": 200, "attrs": {} },
     { "type": "wokwi-hc-sr04", "id": "dist1", "top": -10, "left": 260, "attrs": {} },
     { "type": "wokwi-led", "id": "led1", "top": 80, "left": 260, "attrs": {} },
     { "type": "wokwi-resistor", "id": "r1", "top": 100, "left": 300, "attrs": { "value": "330" } },
-    { "type": "wokwi-buzzer", "id": "buzzer1", "top": 160, "left": 260, "attrs": {} },
+    { "type": "wokwi-led", "id": "led2", "top": 140, "left": 260, "attrs": {} },
+    { "type": "wokwi-resistor", "id": "r2", "top": 160, "left": 300, "attrs": { "value": "330" } },
     { "type": "wokwi-servo", "id": "servo1", "top": 220, "left": 260, "attrs": {} },
     { "type": "wokwi-ks2e-m-dc5", "id": "relay1", "top": 300, "left": 260, "attrs": {} },
     {
@@ -25,6 +26,16 @@
       "left": 460,
       "attrs": {
         "text": "Stand-in only: this is a bare relay part (needs its own transistor+diode driver). Real wiring assumes an actual relay MODULE breakout (VCC/GND/IN, has its own onboard driver), confirm you have that before connecting a fan, not this bare part or a motor directly to a GPIO.",
+        "fontSize": "12"
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "ampLabel",
+      "top": 420,
+      "left": 260,
+      "attrs": {
+        "text": "Not simulated, Wokwi has no I2S amp part: NS4168 module BCL to D18, LRC to D19, DIN to D23, V to VIN (5V), G to GND. Speaker goes on the amp's own 2-pin output only, neither speaker wire to GND.",
         "fontSize": "12"
       }
     }
@@ -37,8 +48,9 @@
     [ "esp32:D14", "r1:1", "magenta", [] ],
     [ "r1:2", "led1:A", "magenta", [] ],
     [ "led1:C", "esp32:GND.2", "black", [] ],
-    [ "esp32:D25", "buzzer1:1", "purple", [] ],
-    [ "esp32:GND.2", "buzzer1:2", "black", [] ],
+    [ "esp32:D13", "r2:1", "magenta", [] ],
+    [ "r2:2", "led2:A", "magenta", [] ],
+    [ "led2:C", "esp32:GND.2", "black", [] ],
     [ "esp32:D33", "servo1:PWM", "blue", [] ],
     [ "esp32:VIN", "bb1:tp.2", "red", [] ],
     [ "esp32:GND.2", "bb1:tn.2", "black", [] ],

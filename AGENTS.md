@@ -21,11 +21,13 @@ targets, FQBN, port, and how Wokwi picks up build output.
   replacement for the dead IR receiver.
 - `modules/buzzer_web/` - passive buzzer played as a mini piano (`C4`-`C5`)
   from a web page, same `WiFiManager` captive portal pattern as `servo_web`.
-- `modules/scare_prop/` - autonomous jump-scare prop, no WiFi: an HC-SR04
-  distance sensor triggers a fan relay, LED, buzzer siren, and servo jerk when
-  something gets close. Read its `diagram.md` before wiring the fan, a bare
-  motor or bare relay coil on a GPIO will damage the pin, it needs an actual
-  relay MODULE (onboard driver), confirm that's what you have first.
+- `modules/scare_prop/` - jump-scare prop: an HC-SR04 distance sensor triggers
+  a fan relay, two flickering LEDs, a synthesized ghost moan on a speaker
+  through an NS4168 I2S amp, and a servo jerk when something gets close. Also
+  controllable from a phone (`WiFiManager` portal `ScareSetup`, times out to
+  sensor-only after 2 minutes). Read its `diagram.md` before wiring the fan, a
+  bare motor or bare relay coil on a GPIO will damage the pin, it needs an
+  actual relay MODULE (onboard driver), confirm that's what you have first.
 - `modules/epaper/` - drives a 4.2in SPI e-paper module via GxEPD2, currently
   just draws a placeholder, no calendar/notes/image source wired up yet.
   Wokwi has no e-paper part, its diagram is wiring documentation only, not a
