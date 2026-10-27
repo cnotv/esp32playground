@@ -38,7 +38,7 @@
       "top": 260,
       "left": 560,
       "attrs": {
-        "text": "Real module also has a BUSY pin, wire it to D4. The stand-in part has no equivalent pin so it is not drawn here.",
+        "text": "Real module also has a BUSY pin (purple wire), wire it to D4. The stand-in part has no equivalent pin so it is not drawn here. Module silkscreen names: SDA = MOSI, SCL = SCK, RES = RST.",
         "fontSize": "13"
       }
     }
@@ -46,10 +46,10 @@
   "connections": [
     [ "esp32:3V3", "epaper1:VCC", "red", [] ],
     [ "esp32:GND.1", "epaper1:GND", "black", [] ],
-    [ "esp32:D23", "epaper1:MOSI", "green", [] ],
-    [ "esp32:D18", "epaper1:SCK", "blue", [] ],
-    [ "esp32:D5", "epaper1:CS", "orange", [] ],
-    [ "esp32:D17", "epaper1:D/C", "yellow", [] ],
-    [ "esp32:D16", "epaper1:RST", "white", [] ]
+    [ "esp32:D23", "epaper1:MOSI", "yellow", [] ],
+    [ "esp32:D18", "epaper1:SCK", "green", [] ],
+    [ "esp32:D5", "epaper1:CS", "blue", [] ],
+    [ "esp32:TX2", "epaper1:D/C", "white", [] ],
+    [ "esp32:RX2", "epaper1:RST", "orange", [] ]
   ]
 }

@@ -127,8 +127,17 @@ was moved earlier in the `parts` array.
 `wokwi-potentiometer`, `wokwi-breadboard` (830 point full board; the `-half` and
 `-mini` variants also exist), `wokwi-servo` (pins `GND`, `V+`, `PWM`).
 
-ESP32 ground pins are `GND.1`, `GND.2`, `GND.3`. `VIN` is the 5V rail when the
-board is USB powered, and is what the 5V LCD should run from.
+ESP32 ground pins are `GND.1` and `GND.2` only, there is no `GND.3`. `VIN` is
+the 5V rail when the board is USB powered, and is what the 5V LCD should run
+from.
+
+`wokwi-esp32-devkit-v1` has no `D16` or `D17` pin: GPIO16 is `RX2` and GPIO17
+is `TX2`, same as the silkscreen on the real 30-pin board. GPIO1 and GPIO3 are
+`TX0` and `RX0`. Full list, verified against
+`wokwi/wokwi-elements` `src/esp32-devkit-v1-element.ts`: `VIN`, `GND.2`, `D13`,
+`D12`, `D14`, `D27`, `D26`, `D25`, `D33`, `D32`, `D35`, `D34`, `VN`, `VP`, `EN`
+on one side, `3V3`, `GND.1`, `D15`, `D2`, `D4`, `RX2`, `TX2`, `D5`, `D18`,
+`D19`, `D21`, `RX0`, `TX0`, `D22`, `D23` on the other.
 
 ## Validating a diagram edit
 
