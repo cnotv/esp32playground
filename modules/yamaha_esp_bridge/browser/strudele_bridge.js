@@ -2,7 +2,10 @@
 // Connects via WebSocket to ESP; creates a virtual MIDI feed for strudeleditor.
 // If navigator.requestMIDIAccess is available, this can feed it via a polyfill.
 (function(){
-  const ws = new WebSocket(`ws://${location.hostname}:80/midi`);
+  // Opened from file:// there is no hostname, so ask for the ESP address.
+  const host = location.hostname || prompt("ESP IP address");
+  if (!host) throw new Error("ESP IP required");
+  const ws = new WebSocket(`ws://${host}:80/midi`);
   window.yamahaMIDI = { notes: {}, send: null };
 
   ws.onopen = () => {
