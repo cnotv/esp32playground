@@ -1,4 +1,0 @@
-[wokwi]
-version = 1
-firmware = '../servo/build/esp32.esp32.esp32/servo.ino.bin'
-elf = '../servo/build/esp32.esp32.esp32/servo.ino.elf'
