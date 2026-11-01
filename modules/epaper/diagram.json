@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "author": "Copilot",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-text",
+      "id": "title",
+      "top": -60,
+      "left": 0,
+      "attrs": {
+        "text": "ESP32 DevKit v1 and a 4.2in SPI e-paper module (WeAct style), wired directly",
+        "fontSize": "22"
+      }
+    },
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp32", "top": 14.3, "left": 62.2, "attrs": {} },
+    {
+      "type": "wokwi-text",
+      "id": "espLabel",
+      "top": -20,
+      "left": 0,
+      "attrs": { "text": "ESP32 DevKit v1", "fontSize": "14" }
+    },
+    { "type": "wokwi-ili9341", "id": "epaper1", "top": 40, "left": 420, "attrs": {} },
+    {
+      "type": "wokwi-text",
+      "id": "epaperLabel",
+      "top": 0,
+      "left": 560,
+      "attrs": {
+        "text": "Stand-in part only: Wokwi has no e-paper element. This is a wokwi-ili9341 wired to the real e-paper pin names/positions, it will not render like the real panel and its firmware (GxEPD2/SSD1683 protocol) is not what this part simulates.",
+        "fontSize": "13"
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "busyLabel",
+      "top": 260,
+      "left": 560,
+      "attrs": {
+        "text": "Real module also has a BUSY pin, wire it to D4. The stand-in part has no equivalent pin so it is not drawn here.",
+        "fontSize": "13"
+      }
+    }
+  ],
+  "connections": [
+    [ "esp32:3V3", "epaper1:VCC", "red", [] ],
+    [ "esp32:GND.1", "epaper1:GND", "black", [] ],
+    [ "esp32:D23", "epaper1:MOSI", "green", [] ],
+    [ "esp32:D18", "epaper1:SCK", "blue", [] ],
+    [ "esp32:D5", "epaper1:CS", "orange", [] ],
+    [ "esp32:D17", "epaper1:D/C", "yellow", [] ],
+    [ "esp32:D16", "epaper1:RST", "white", [] ]
+  ]
+}
