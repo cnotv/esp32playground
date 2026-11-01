@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "author": "cnotv",
+  "editor": "wokwi",
+  "parts": [
+    {"type":"wokwi-text","id":"t","top":-50,"left":0,"attrs":{"text":"ESP32-S3 Drum Synth — 5 buttons + pot + pattern","fontSize":"14"}},
+    {"type":"wokwi-esp32-devkit-v1","id":"esp","top":20,"left":0,"attrs":{"label":"S3"}},
+    {"type":"wokwi-breadboard","id":"bb","top":160,"left":200,"attrs":{"rows":12,"cols":10}},
+    {"type":"wokwi-text","id":"b_l","top":150,"left":220,"attrs":{"text":"Drums: GPIO4/5/6/7 | Mode: GPIO8"}},
+    {"type":"wokwi-text","id":"pot_l","top":300,"left":220,"attrs":{"text":"Pot GPIO2 -> Vol/Tempo/Filter/Touch mode"}},
+    {"type":"wokwi-text","id":"pat_l","top":340,"left":20,"attrs":{"text":"Pattern: 4-step loop (B4=trigger)"}},
+    {"type":"wokwi-text","id":"amp_l","top":380,"left":20,"attrs":{"text":"MAX98357A I2S GPIO16/17/18"}},
+    {"type":"wokwi-text","id":"note","top":420,"left":0,"attrs":{"text":"Shortcut: pot mode cycles on GPIO8; 4 embedded WAVs replace dummies"}}
+  ],
+  "connections": [
+    ["esp:GPIO4","bb:5-2",""],["esp:GPIO5","bb:7-2",""],["esp:GPIO6","bb:9-2",""],["esp:GPIO7","bb:11-2",""],
+    ["esp:GPIO8","bb:13-2",""],["esp:GPIO2","bb:5-6",""],["esp:GND","bb:-1",""],["esp:3V3","bb:+1",""]
+  ]
+}
