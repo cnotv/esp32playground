@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "author": "Copilot",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-text",
+      "id": "title",
+      "top": -40,
+      "left": 0,
+      "attrs": { "text": "ESP32 DevKit v1, micro servo, and IR receiver", "fontSize": "22" }
+    },
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp32", "top": 14.3, "left": 62.2, "attrs": {} },
+    {
+      "type": "wokwi-text",
+      "id": "espLabel",
+      "top": -20,
+      "left": 0,
+      "attrs": { "text": "ESP32 DevKit v1", "fontSize": "14" }
+    },
+    { "type": "wokwi-breadboard", "id": "bb1", "top": 265.8, "left": 233.2, "attrs": {} },
+    {
+      "type": "wokwi-servo",
+      "id": "servo1",
+      "top": -10.6,
+      "left": 318.6,
+      "rotate": 270,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-text",
+      "id": "servoLabel",
+      "top": 180,
+      "left": 450,
+      "attrs": {
+        "text": "Micro servo, PWM to D33. On real hardware, power V+ from a separate 5V supply, not the ESP32, servo current spikes brown out the board",
+        "fontSize": "14"
+      }
+    },
+    { "type": "wokwi-ir-receiver", "id": "ir1", "top": 350, "left": 550, "attrs": {} },
+    {
+      "type": "wokwi-text",
+      "id": "irLabel",
+      "top": 330,
+      "left": 550,
+      "attrs": {
+        "text": "IR receiver, DAT to D4, VCC from 3V3 (not 5V, protects the GPIO). Real module wire colors: green=VCC, yellow=GND, red=DAT",
+        "fontSize": "14"
+      }
+    }
+  ],
+  "connections": [
+    [ "esp32:VIN", "bb1:tp.2", "red", [] ],
+    [ "esp32:GND.2", "bb1:tn.2", "black", [] ],
+    [ "esp32:D33", "servo1:PWM", "magenta", [] ],
+    [ "servo1:V+", "bb1:tp.11", "red", [] ],
+    [ "servo1:GND", "bb1:tn.11", "black", [] ],
+    [ "esp32:D4", "ir1:DAT", "red", [] ],
+    [ "esp32:3V3", "ir1:VCC", "green", [] ],
+    [ "ir1:GND", "bb1:tn.11", "yellow", [] ]
+  ],
+  "dependencies": {}
+}
