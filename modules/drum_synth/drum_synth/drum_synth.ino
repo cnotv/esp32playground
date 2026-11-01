@@ -6,7 +6,9 @@
  * Replace SAMPLE_KICK / SNARE / HAT / OPEN with converted 16-bit mono 22050Hz arrays.
  */
 #include <Arduino.h>
-#include <esp_i2s.h>
+#include <ESP_I2S.h>
+
+static I2SClass i2s;
 
 // ----- Pins -----
 const uint8_t BTN[4] = {4, 5, 6, 7};
@@ -32,25 +34,7 @@ const size_t S_LEN = sizeof(SAMPLE_KICK) / sizeof(int16_t);
 // ----- Pattern (4-step loop) -----
 const uint8_t PATTERN_STEPS[4] = {1, 2, 3, 1};  // snare, hat, open, kick (example)
 
-// ----- I2S -----
-static i2s_config_t i2s_cfg = {
-  .mode = I2S_MODE_TX,
-  .sample_rate = 22050,
-  .bits_per_sample = I2S_BITS_PER_SAMPLE_16BIT,
-  .channel_format = I2S_CHANNEL_FMT_ONLY_LEFT,
-  .communication_format = I2S_COMM_FORMAT_STAND_I2S,
-  .intr_alloc_flags = 0,
-  .dma_buf_count = 4,
-  .dma_buf_len = 512,
-  .use_apll = true,
-};
-static i2s_pin_config_t i2s_pin = {
-  .mck_io_num = I2S_PIN_NO_CHANGE,
-  .bclk_io_num = 16,
-  .ws_io_num = 17,
-  .data_out_num = 18,
-  .data_in_num = I2S_PIN_NO_CHANGE,
-};
+// ----- I2S (ESP_I2S) -----
 
 // ----- Setup -----
 void setup() {
@@ -61,18 +45,23 @@ void setup() {
   analogReadResolution(12);
   analogSetAttenuation(ADC_11db);
 
-  ESP_ERROR_CHECK(i2s_driver_install(I2S_NUM_0, &i2s_cfg, 0, NULL));
-  ESP_ERROR_CHECK(i2s_set_pin(I2S_NUM_0, &i2s_pin));
-  ESP_ERROR_CHECK(i2s_start(I2S_NUM_0));
+  i2s.setPins(16, 17, 18);  // BCLK, LRCLK, DATA
+  i2s.begin(I2S_MODE_STD, 22050, I2S_DATA_BIT_WIDTH_16BIT, I2S_SLOT_MODE_MONO);
 
   Serial.printf("Drum synth ready — mode=%d (VOL/TEMPO/FILTER/TOUCH)\n", activeMode);
 }
 
 // ----- Play one embedded sample -----
 void playSample(const int16_t* s, size_t len, float gain) {
+  int16_t buf[512];
+  size_t pos = 0;
   for (size_t i = 0; i < len; i++) {
     int16_t v = (int16_t)(s[i] * gain);
-    ESP_ERROR_CHECK(i2s_write(I2S_NUM_0, &v, sizeof(v), portMAX_DELAY));
+    buf[pos++] = v;
+    if (pos >= 512 || i == len - 1) {
+      i2s.write(buf, pos * sizeof(int16_t));
+      pos = 0;
+    }
   }
 }
 
