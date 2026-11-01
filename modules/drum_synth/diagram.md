@@ -17,6 +17,7 @@ ESP32-S3 (S3 dev board)
     GPIO18 = DATA
     VCC = 3V3, GND = GND
 
+Built on a breadboard (S3 + buttons + pot + I2S amp jumpers).
 4 buttons: 4-leg pushbutton — wire opposite corners (GPIO + GND); other 2 pins are paired terminal.
 Pot: 10k between 3V3 and GND, wiper to GPIO2.
 ```
